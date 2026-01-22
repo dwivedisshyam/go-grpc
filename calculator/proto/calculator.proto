@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package calculator;
+
+option go_package = "github.com/go-grpc/calculator/proto";
+
+message SumRequest {
+    int32 first_number = 1;
+    int32 second_number = 2;
+}
+
+message SumResponse {
+    int32 result = 1;
+}
+
+message PrimeNumberDecompositionRequest {
+    int64 number = 1;
+}
+
+message PrimeNumberDecompositionResponse {
+    int64 prime_factor = 1;
+}
+
+message AvgRequest {
+    int32 number = 1;
+}
+
+message AvgResponse {
+    double avg = 1;
+}
+
+message CurrentMaxRequest {
+    int32 number = 1;
+}
+
+message CurrentMaxResponse {
+    int32 number = 1;
+}
+
+message SqrtRequest {
+    int32 number = 1;
+}
+
+message SqrtResponse {
+    double sqrt = 1;
+}
+
+service CalculatorService {
+    rpc Sum(SumRequest) returns (SumResponse);
+    rpc PrimeNumberDecomposition(PrimeNumberDecompositionRequest) returns (stream PrimeNumberDecompositionResponse);
+    rpc Average(stream AvgRequest) returns (AvgResponse);
+    rpc CurrentMax(stream CurrentMaxRequest) returns (stream CurrentMaxResponse);
+    rpc Sqrt(SqrtRequest) returns (SqrtResponse);
+}
